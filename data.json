@@ -1,10 +1,15 @@
 {
   "ko": {
-    "1": ["학교", "바다", "사과", "친구", "가족", "선생님", "강아지", "비행기", "여름", "겨울"],
-    "2": ["오늘 날씨가 좋아요.", "나는 학교에 가요.", "엄마와 시장에 갔어요.", "친구와 같이 놀았어요.", "저는 사과를 좋아해요."]
+    "1": ["가", "나", "다", "라", "마", "바", "사", "아", "자", "차"],
+    "2": ["카", "파", "타", "하", "고", "교", "구", "규", "그", "기"],
+    "3": ["기차", "나라", "바다", "나비", "과자", "고기", "사랑", "엄마", "아빠", "누나"],    
+    "4": ["오늘 날씨가 좋아요.", "나는 학교에 가요.", "엄마와 시장에 갔어요.", "친구와 같이 놀았어요.", "저는 사과를 좋아해요."]
   },
   "en": {
-    "1": ["apple", "banana", "school", "family", "teacher", "dog", "plane", "summer", "winter", "friend"],
-    "2": ["I like apples.", "She goes to school.", "We play together.", "It's a sunny day.", "Please open the door."]
+    "1": ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"],
+    "2": ["K", "L", "M", "N", "O", "P", "Q", "R", "S", "T"],
+    "3": ["U", "V", "W", "X", "Y", "Z", "dog", "cat", "star", "mom"],
+    "4": ["apple", "banana", "school", "family", "teacher", "dog", "plane", "summer", "winter", "friend"],
+    "5": ["I like apples.", "She goes to school.", "We play together.", "It's a sunny day.", "Please open the door."]
   }
 }
