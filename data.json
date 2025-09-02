@@ -1,0 +1,10 @@
+{
+  "ko": {
+    "1": ["학교", "바다", "사과", "친구", "가족", "선생님", "강아지", "비행기", "여름", "겨울"],
+    "2": ["오늘 날씨가 좋아요.", "나는 학교에 가요.", "엄마와 시장에 갔어요.", "친구와 같이 놀았어요.", "저는 사과를 좋아해요."]
+  },
+  "en": {
+    "1": ["apple", "banana", "school", "family", "teacher", "dog", "plane", "summer", "winter", "friend"],
+    "2": ["I like apples.", "She goes to school.", "We play together.", "It's a sunny day.", "Please open the door."]
+  }
+}
