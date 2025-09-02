@@ -6,22 +6,32 @@
   <title>달봉이의 받아쓰기 (KR/EN)</title>
   <link rel="stylesheet" href="styles.css" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230055ff'/><text x='50' y='58' font-size='56' text-anchor='middle' fill='white'>✍️</text></svg>'>
-  <!-- Firebase compat SDK (전역 firebase 객체 사용) -->
+
+  <!-- ✅ Firebase compat SDK (전역 window.firebase 사용) -->
   <script src="https://www.gstatic.com/firebasejs/10.12.3/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.3/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore-compat.js"></script>
+  <!-- (선택) Analytics도 쓰려면 아래 1줄 추가 후 measurementId 포함 -->
+  <!-- <script src="https://www.gstatic.com/firebasejs/10.12.3/firebase-analytics-compat.js"></script> -->
+
   <script>
-    // ✅ Firebase 설정: 실제 프로젝트 정보로 교체하세요
-    window.FIREBASE_ENABLED = true; // 배포 전 true로 전환
+    // ✅ Firebase 설정 (Compat)
+    window.FIREBASE_ENABLED = true; // 필요 없으면 false
     window.firebaseConfig = {
       apiKey: "AIzaSyA4z4XncM_fVtLW_z1lNdyep8oxXUv25TQ",
       authDomain: "wordrecord-ff462.firebaseapp.com",
       projectId: "wordrecord-ff462",
-      storageBucket: "wordrecord-ff462.firebasestorage.app",
-      messagingSenderId: "",
-      appId: ""
+      storageBucket: "wordrecord-ff462.appspot.com",   // ✔️ 형식 주의
+      messagingSenderId: "347551014179",
+      appId: "1:347551014179:web:43597188598e25e7e6c096"
+      // measurementId: "G-C633M816SJ" // (Analytics 쓸 때만)
     };
-    if (window.FIREBASE_ENABLED) { firebase.initializeApp(window.firebaseConfig); }
+
+    if (window.FIREBASE_ENABLED) {
+      firebase.initializeApp(window.firebaseConfig);
+      // (선택) Analytics 사용 시:
+      // if (firebase.analytics) { firebase.analytics(); }
+    }
   </script>
 </head>
 <body>
@@ -207,6 +217,7 @@
     </form>
   </dialog>
 
+  <!-- 앱 로직 -->
   <script src="script.js" defer></script>
 </body>
 </html>
