@@ -3,9 +3,26 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-  <title>달봉이의 받아쓰기(KR/EN)</title>
+  <title>달봉이의 받아쓰기 (KR/EN)</title>
   <link rel="stylesheet" href="styles.css" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230055ff'/><text x='50' y='58' font-size='56' text-anchor='middle' fill='white'>✍️</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230055ff'/><text x='50' y='58' font-size='56' text-anchor='middle' fill='white'>✍️</text></svg>'>
+  <!-- Firebase compat SDK (전역 firebase 객체 사용) -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.3/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.3/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore-compat.js"></script>
+  <script>
+    // ✅ Firebase 설정: 실제 프로젝트 정보로 교체하세요
+    window.FIREBASE_ENABLED = false; // 배포 전 true로 전환
+    window.firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_PROJECT.firebaseapp.com",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_PROJECT.appspot.com",
+      messagingSenderId: "",
+      appId: ""
+    };
+    if (window.FIREBASE_ENABLED) { firebase.initializeApp(window.firebaseConfig); }
+  </script>
 </head>
 <body>
   <div id="app">
@@ -79,9 +96,6 @@
         <div class="row">
           <button id="startBtn" class="btn primary">시작하기</button>
         </div>
-        <div class="row">
-          <button id="practiceBtn" class="btn">실전쓰기</button>
-        </div>
       </section>
     </main>
 
@@ -114,11 +128,39 @@
       </section>
     </main>
 
-    <!-- 실전쓰기 화면 -->
+    <!-- 실전쓰기 화면 (독립 설정 포함) -->
     <main id="view-practice" class="view">
       <section class="card play">
-        <h2>실전쓰기 모드</h2>
-        <p class="hint">재생(▶)을 눌러 들은 뒤 노트에 받아 적으세요. 정답은 가려져 있으며 필요할 때만 열어볼 수 있어요. 모두 적은 뒤 <strong>채점하기</strong>로 정답/오답을 표시하고 <strong>기록 저장</strong>을 누르세요.</p>
+        <h2>실전쓰기</h2>
+        <div class="row">
+          <label class="label">언어</label>
+          <div class="segmented" id="prLangButtons" role="tablist">
+            <button class="seg active" data-lang="ko" role="tab">한국어</button>
+            <button class="seg" data-lang="en" role="tab">English</button>
+          </div>
+        </div>
+        <div class="row">
+          <label for="prLevelSelect" class="label">급수</label>
+          <select id="prLevelSelect" class="select"></select>
+        </div>
+        <div class="row">
+          <label for="prCountSelect" class="label">문항 수</label>
+          <select id="prCountSelect" class="select">
+            <option>5</option>
+            <option selected>10</option>
+            <option>15</option>
+            <option>20</option>
+          </select>
+        </div>
+        <div class="row">
+          <label for="prRate" class="label">읽기 속도 <span id="prRateVal">1.0×</span></label>
+          <input id="prRate" type="range" min="0.6" max="1.4" step="0.1" value="1.0" />
+        </div>
+        <div class="row">
+          <button id="prStartBtn" class="btn primary">실전 시작</button>
+        </div>
+
+        <p class="hint">▶ 버튼으로 들은 뒤 <strong>노트에 받아 적고</strong> 각 문항을 <strong>정답/오답</strong>으로만 표시하세요. (별도 정답보기 버튼 없음)</p>
         <div id="drillList" class="drill-list"></div>
         <div class="actions">
           <button id="drillGradeBtn" class="btn">채점하기</button>

@@ -57,6 +57,8 @@ body {
 .segmented { display: inline-flex; background: #0d1526; border: 1px solid var(--border); border-radius: 12px; padding: 4px; gap: 4px; }
 .seg { background: transparent; border: 0; color: #9fb0c3; padding: 8px 12px; border-radius: 8px; font-weight: 700; }
 .seg.active { background: #1a2440; color: #e9f0ff; }
+.seg.ghost { opacity: .9; font-weight: 600; }
+.seg.tiny { padding: 6px 10px; font-size: 12px; }
 
 /* 플레이 화면 */
 .card.play { padding: 12px; }
@@ -69,6 +71,13 @@ body {
 .feedback { margin-top: 10px; padding: 8px 10px; border-radius: 10px; background: #0f1830; border: 1px dashed var(--border); min-height: 24px; }
 .feedback.ok { border-color: rgba(24,197,122,.6); background: rgba(24,197,122,.08); }
 .feedback.no { border-color: rgba(255,103,103,.6); background: rgba(255,103,103,.08); }
+
+/* 실전쓰기 목록 */
+.drill-list { display: grid; gap: 8px; }
+.drill-item { display: grid; grid-template-columns: 44px 1fr; gap: 10px; align-items: start; border: 1px solid var(--border); border-radius: 12px; padding: 8px; background: #0f1830; }
+.drill-item .qmeta { font-weight: 700; margin-bottom: 4px; }
+.drill-item .answer { margin-top: 6px; color: #cfe0ff; font-size: 14px; }
+.drill-item .mark { margin-top: 8px; }
 
 /* 기록 */
 .records { display: grid; gap: 10px; margin-top: 10px; }
