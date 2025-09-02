@@ -32,6 +32,10 @@
           <span class="emoji">📊</span>
           <span class="label">기록</span>
         </button>
+        <button class="app-icon" data-route="practice" aria-label="실전쓰기">
+          <span class="emoji">📝</span>
+          <span class="label">실전쓰기</span>
+        </button>
       </section>
     </main>
 
@@ -75,6 +79,9 @@
         <div class="row">
           <button id="startBtn" class="btn primary">시작하기</button>
         </div>
+        <div class="row">
+          <button id="practiceBtn" class="btn">실전쓰기</button>
+        </div>
       </section>
     </main>
 
@@ -94,7 +101,7 @@
           <button id="replayBtn" class="btn round" aria-label="문제 재생">▶</button>
         </div>
 
-        <p class="hint">※ 화면에는 정답이 보이지 않습니다. 버튼을 눌러 음성을 듣고 받아 적으세요.</p>
+        <p class="hint">※ 화면에는 정답이 보이지 않습니다. 버튼을 눌러 음성을 듣고 노트에 받아 적으세요.</p>
 
         <input id="answerInput" class="input" type="text" placeholder="여기에 입력" autocomplete="off" />
 
@@ -104,6 +111,18 @@
         </div>
 
         <div id="feedback" class="feedback" aria-live="polite"></div>
+      </section>
+    </main>
+
+    <!-- 실전쓰기 화면 -->
+    <main id="view-practice" class="view">
+      <section class="card play">
+        <h2>실전쓰기 모드</h2>
+        <p class="hint">음성만 듣고 실제 노트에 받아 적으세요. 모든 문제는 마지막에 정답과 비교할 수 있습니다.</p>
+        <div class="actions">
+          <button id="practiceStartBtn" class="btn primary">실전 시작</button>
+        </div>
+        <div id="practiceArea"></div>
       </section>
     </main>
 
