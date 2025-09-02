@@ -118,11 +118,12 @@
     <main id="view-practice" class="view">
       <section class="card play">
         <h2>실전쓰기 모드</h2>
-        <p class="hint">음성만 듣고 실제 노트에 받아 적으세요. 모든 문제는 마지막에 정답과 비교할 수 있습니다.</p>
+        <p class="hint">재생(▶)을 눌러 들은 뒤 노트에 받아 적으세요. 정답은 가려져 있으며 필요할 때만 열어볼 수 있어요. 모두 적은 뒤 <strong>채점하기</strong>로 정답/오답을 표시하고 <strong>기록 저장</strong>을 누르세요.</p>
+        <div id="drillList" class="drill-list"></div>
         <div class="actions">
-          <button id="practiceStartBtn" class="btn primary">실전 시작</button>
+          <button id="drillGradeBtn" class="btn">채점하기</button>
+          <button id="drillSaveBtn" class="btn primary">기록 저장</button>
         </div>
-        <div id="practiceArea"></div>
       </section>
     </main>
 
