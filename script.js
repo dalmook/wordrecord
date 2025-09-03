@@ -17,6 +17,10 @@ import {
   onSnapshot, serverTimestamp, query, orderBy
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
+const app  = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db   = getFirestore(app);
+let uid = null;
 
 // ===== 디버그 배지 & 로그 (태블릿 친화) =====
 const appLog = (() => {
