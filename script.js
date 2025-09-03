@@ -117,7 +117,6 @@
   function startSession(){
     var items=(state.data&&state.data[state.lang]&&state.data[state.lang][state.level]||[]).slice();
     if(items.length===0){ alert('선택한 급수의 문제가 없습니다.'); return; }
-    shuffle(items);
     var qs=items.slice(0,Math.min(state.count,items.length));
     state.session={items:qs, idx:0, answers:[], childId:activeChildId(), lang:state.lang, level:state.level, mode:MODE_STANDARD};
     $('#progNow').textContent='1'; $('#progTotal').textContent=String(qs.length); $('#qNum').textContent='1';
