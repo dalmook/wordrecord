@@ -12,8 +12,6 @@ const firebaseConfig = {
   apiKey: "AIzaSyA4z4XncM_fVtLW_z1lNdyep8oxXUv25TQ",
   authDomain: "wordrecord-ff462.firebaseapp.com",
   projectId: "wordrecord-ff462",
-  storageBucket: "wordrecord-ff462.appspot.com",
-  messagingSenderId: "347551014179",
   appId: "1:347551014179:web:43597188598e25e7e6c096"
 };
 
