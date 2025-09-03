@@ -170,7 +170,6 @@ document.querySelector('#prLevelSelect')
   function startDrill(){
     var items=(state.data&&state.data[state.prLang]&&state.data[state.prLang][state.prLevel]||[]).slice();
     if(items.length===0){ alert('선택한 급수의 문제가 없습니다.'); return; }
-    shuffle(items);
     var qs=items.slice(0,Math.min(state.prCount,items.length));
     state.session={items:qs, idx:0, answers:Array(qs.length).fill(null), childId:activeChildId(), lang:state.prLang, level:state.prLevel, mode:MODE_DRILL};
     renderDrillList();
