@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>달봉이의 받아쓰기 (KR/EN)</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230055ff'/><text x='50' y='58' font-size='56' text-anchor='middle' fill='white'>✍️</text></svg>'>
+
+  <!-- ✅ Firebase compat SDK (전역 window.firebase 사용) -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.3/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.3/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore-compat.js"></script>
+
+  <script>
+    // ✅ Firebase 설정 (Compat)
+    window.FIREBASE_ENABLED = true; // 필요 없으면 false
+    window.firebaseConfig = {
+      apiKey: "AIzaSyA4z4XncM_fVtLW_z1lNdyep8oxXUv25TQ",
+      authDomain: "wordrecord-ff462.firebaseapp.com",
+      projectId: "wordrecord-ff462",
+      storageBucket: "wordrecord-ff462.firebasestorage.app",
+      messagingSenderId: "347551014179",
+      appId: "1:347551014179:web:43597188598e25e7e6c096"
+    };
+
+    if (window.FIREBASE_ENABLED) {
+      firebase.initializeApp(window.firebaseConfig);
+    }
+  </script>
+</head>
+<body>
+  <div id="app">
+    <!-- 상단 바 -->
+    <header class="topbar">
+      <div class="left">
+        <button class="btn icon" data-route="home" aria-label="홈으로">🏠</button>
+      </div>
+      <h1 class="title">받아쓰기</h1>
+      <div class="right">
+        <select id="childSelect" class="select small" aria-label="아이 선택"></select>
+        <button id="addChildBtn" class="btn icon" aria-label="아이 추가">➕</button>
+      </div>
+    </header>
+
+    <!-- 홈 화면: 스마트폰 아이콘 그리드 -->
+    <main id="view-home" class="view active">
+      <section class="homescreen">
+        <button class="app-icon" data-route="setup" aria-label="받아쓰기">
+          <span class="emoji">🎧</span>
+          <span class="label">받아쓰기</span>
+        </button>
+        <button class="app-icon" data-route="records" aria-label="기록">
+          <span class="emoji">📊</span>
+          <span class="label">기록</span>
+        </button>
+        <button class="app-icon" data-route="practice" aria-label="실전쓰기">
+          <span class="emoji">📝</span>
+          <span class="label">실전쓰기</span>
+        </button>
+      </section>
+    </main>
+
+    <!-- 받아쓰기 설정 화면 -->
+    <main id="view-setup" class="view">
+      <section class="card">
+        <h2>설정</h2>
+        <div class="row">
+          <label class="label">언어</label>
+          <div class="segmented" id="langButtons" role="tablist">
+            <button class="seg active" data-lang="ko" role="tab">한국어</button>
+            <button class="seg" data-lang="en" role="tab">English</button>
+          </div>
+        </div>
+
+        <div class="row">
+          <label for="levelSelect" class="label">급수</label>
+          <select id="levelSelect" class="select"></select>
+        </div>
+
+        <div class="row">
+          <label for="countSelect" class="label">문항 수</label>
+          <select id="countSelect" class="select">
+            <option>5</option>
+            <option selected>10</option>
+            <option>15</option>
+            <option>20</option>
+          </select>
+        </div>
+
+        <div class="row">
+          <label for="rate" class="label">음성 속도 <span id="rateVal">1.0×</span></label>
+          <input id="rate" type="range" min="0.6" max="1.4" step="0.1" value="1.0" />
+        </div>
+
+        <div class="row">
+          <label for="voiceSelect" class="label">음성(가능 시)</label>
+          <select id="voiceSelect" class="select"></select>
+        </div>
+
+        <div class="row">
+          <button id="startBtn" class="btn primary">시작하기</button>
+        </div>
+      </section>
+    </main>
+
+    <!-- 받아쓰기 진행 화면 -->
+    <main id="view-play" class="view">
+      <section class="card play">
+        <div class="play-top">
+          <div class="progress"><span id="progNow">1</span>/<span id="progTotal">10</span></div>
+          <div class="speed">
+            <label for="rateInPlay" class="label small">속도 <span id="rateVal2">1.0×</span></label>
+            <input id="rateInPlay" type="range" min="0.6" max="1.4" step="0.1" value="1.0" />
+          </div>
+        </div>
+
+        <div class="question-row">
+          <h3 class="qtitle">문제 <span id="qNum">1</span></h3>
+          <button id="replayBtn" class="btn round" aria-label="문제 재생">▶</button>
+        </div>
+
+        <p class="hint">※ 화면에는 정답이 보이지 않습니다. 버튼을 눌러 음성을 듣고 노트에 받아 적으세요.</p>
+
+        <input id="answerInput" class="input" type="text" placeholder="여기에 입력" autocomplete="off" />
+
+        <div class="actions">
+          <button id="checkBtn" class="btn">정답 확인</button>
+          <button id="nextBtn" class="btn primary">다음</button>
+        </div>
+
+        <div id="feedback" class="feedback" aria-live="polite"></div>
+      </section>
+    </main>
+
+    <!-- 실전쓰기 화면 (독립 설정 포함) -->
+    <main id="view-practice" class="view">
+      <section class="card play">
+        <h2>실전쓰기</h2>
+        <div class="row">
+          <label class="label">언어</label>
+          <div class="segmented" id="prLangButtons" role="tablist">
+            <button class="seg active" data-lang="ko" role="tab">한국어</button>
+            <button class="seg" data-lang="en" role="tab">English</button>
+          </div>
+        </div>
+        <div class="row">
+          <label for="prLevelSelect" class="label">급수</label>
+          <select id="prLevelSelect" class="select"></select>
+        </div>
+        <div class="row">
+          <label for="prCountSelect" class="label">문항 수</label>
+          <select id="prCountSelect" class="select">
+            <option>5</option>
+            <option selected>10</option>
+            <option>15</option>
+            <option>20</option>
+          </select>
+        </div>
+        <div class="row">
+          <label for="prRate" class="label">읽기 속도 <span id="prRateVal">1.0×</span></label>
+          <input id="prRate" type="range" min="0.6" max="1.4" step="0.1" value="1.0" />
+        </div>
+        <div class="row">
+          <button id="prStartBtn" class="btn primary">실전 시작</button>
+        </div>
+
+        <p class="hint">▶ 버튼으로 들은 뒤 <strong>노트에 받아 적고</strong> 각 문항을 <strong>정답/오답</strong>으로만 표시하세요. (별도 정답보기 버튼 없음)</p>
+        <div id="drillList" class="drill-list"></div>
+        <div class="actions">
+          <button id="drillGradeBtn" class="btn">채점하기</button>
+          <button id="drillSaveBtn" class="btn primary">기록 저장</button>
+        </div>
+      </section>
+    </main>
+
+    <!-- 기록 화면 -->
+    <main id="view-records" class="view">
+      <section class="card">
+        <h2>기록</h2>
+        <div class="row wrap">
+          <label class="label">아이</label>
+          <select id="recChild" class="select small"></select>
+          <label class="label">언어</label>
+          <select id="recLang" class="select small">
+            <option value="all">전체</option>
+            <option value="ko">한국어</option>
+            <option value="en">English</option>
+          </select>
+          <label class="label">기간</label>
+          <select id="recRange" class="select small">
+            <option value="7">7일</option>
+            <option value="30" selected>30일</option>
+            <option value="90">90일</option>
+            <option value="all">전체</option>
+          </select>
+        </div>
+        <div id="recordsList" class="records"></div>
+      </section>
+    </main>
+  </div>
+
+  <!-- 아이 추가 모달 -->
+  <dialog id="childModal" class="modal">
+    <form method="dialog" class="modal-card" id="childForm">
+      <h3>아이 추가</h3>
+      <input id="childNameInput" class="input" placeholder="이름 입력" required maxlength="20" />
+      <div class="actions">
+        <button class="btn" value="cancel">취소</button>
+        <button class="btn primary" value="ok">추가</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- 앱 로직 -->
+  <script src="script.js" defer></script>
+</body>
+</html>
