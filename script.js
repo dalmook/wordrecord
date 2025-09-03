@@ -164,6 +164,9 @@
   $('#prCountSelect').addEventListener('change', function(e){ state.prCount=Number(e.target.value); });
   $('#prRate').addEventListener('input', function(e){ state.prRate=Number(e.target.value); $('#prRateVal').textContent=state.prRate.toFixed(1)+'×'; });
   $('#prStartBtn').addEventListener('click', startDrill);
+// ▼ 추가
+document.querySelector('#prLevelSelect')
+  .addEventListener('change', e => { state.prLevel = e.target.value; });
 
   function startDrill(){
     var items=(state.data&&state.data[state.prLang]&&state.data[state.prLang][state.prLevel]||[]).slice();
