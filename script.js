@@ -1,13 +1,4 @@
-// script.js — Firebase Modular SDK + 앱 로직 (완성본)
-
-// ===== Firebase 모듈 import =====
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js";
-import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-auth.js";
-import {
-  getFirestore, collection, addDoc, query, where, orderBy, limit, getDocs
-} from "https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore.js";
-
-// ===== Firebase 초기화 =====
+// === Firebase Firestore 전체공개 동기화 (실시간+낙관적 렌더+월필터 개선) ===
 const firebaseConfig = {
   apiKey: "AIzaSyA4z4XncM_fVtLW_z1lNdyep8oxXUv25TQ",
   authDomain: "wordrecord-ff462.firebaseapp.com",
@@ -15,10 +6,17 @@ const firebaseConfig = {
   appId: "1:347551014179:web:43597188598e25e7e6c096"
 };
 
-const app  = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db   = getFirestore(app);
-let uid = null;
+
+// SDK (ESM)
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {
+  initializeFirestore,
+  persistentLocalCache,
+  persistentSingleTabManager,
+  collection, doc, getDoc, setDoc, addDoc, updateDoc,
+  onSnapshot, serverTimestamp, query, orderBy
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
 
 // ===== 디버그 배지 & 로그 (태블릿 친화) =====
 const appLog = (() => {
