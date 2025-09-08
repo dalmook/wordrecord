@@ -568,7 +568,7 @@
       "No, I don’t.",
       "I have a bird."
     ],
-    "51": "DAD","BAG","JAM","CAVE","LANE","TAPE","VASE","FROG","CRAB","BEE"],
+    "51": ["DAD","BAG","JAM","CAVE","LANE","TAPE","VASE","FROG","CRAB","BEE"],
     "52": [
       "What do you like?",
       "I like milk.",
